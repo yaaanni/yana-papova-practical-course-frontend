@@ -15,7 +15,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
     title,
     message,
     confirmText = "Delete",
-    confirmBtnClass = "btn-dark",
+    confirmBtnClass = "btn-primary",
     onConfirm,
     onCancel
 }) => {

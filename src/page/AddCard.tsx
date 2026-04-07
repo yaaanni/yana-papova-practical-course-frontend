@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Navbar from '../component/Navbar';
 import { requestWithAuth } from '../api/apiClient';
 
 import ErrorAlert from '../component/ErrorAlert';
 
 function AddCard() {
-    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
     const [error, setError] = useState<string | null>(null);

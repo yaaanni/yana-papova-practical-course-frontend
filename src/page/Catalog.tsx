@@ -361,7 +361,6 @@ function Catalog() {
                 title="Remove Product"
                 message="Are you sure you want to delete this item from the catalog? This action cannot be undone."
                 confirmText="Delete"
-                confirmBtnClass="btn-dark"
                 onConfirm={confirmDeleteItem}
                 onCancel={() => { setShowDeleteModal(false); setItemToDelete(null); }}
             />

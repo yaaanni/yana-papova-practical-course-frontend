@@ -317,7 +317,6 @@ function Orders() {
                 title="Delete Order"
                 message="Are you sure you want to permanently delete this order? This action cannot be undone."
                 confirmText="Delete Order"
-                confirmBtnClass="btn-danger"
                 onConfirm={confirmDeleteOrder}
                 onCancel={() => { setShowDeleteModal(false); setOrderToDelete(null); }}
             />

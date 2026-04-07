@@ -1,4 +1,4 @@
-const BASE_URL = 'https://award-experts-paper-allen.trycloudflare.com/api';
+const BASE_URL = 'https://omissions-garage-similarly-decisions.trycloudflare.com/api';
 
 export const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
     const url = endpoint.startsWith('http') ? endpoint : `${BASE_URL}${endpoint}`;

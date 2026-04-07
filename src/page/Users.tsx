@@ -425,7 +425,6 @@ function Users() {
                 show={showDeleteModal}
                 title="Delete User"
                 message="Are you sure you want to permanently delete this user? All associated data will be lost."
-                confirmBtnClass="btn-dark"
                 onConfirm={confirmDeleteUser}
                 onCancel={() => { setShowDeleteModal(false); setUserToDelete(null); }}
             />
@@ -434,7 +433,6 @@ function Users() {
                 show={showCardDeleteModal}
                 title="Remove Payment Card"
                 message="Are you sure you want to remove this card? This action cannot be undone."
-                confirmBtnClass="btn-dark"
                 onConfirm={confirmDeleteCard}
                 onCancel={() => { setShowCardDeleteModal(false); setCardToDelete(null); }}
             />
