@@ -16,7 +16,6 @@ interface Item {
 }
 
 function Catalog() {
-    const navigate = useNavigate();
 
     const [allItems, setAllItems] = useState<Item[]>([]);
     const [displayedItems, setDisplayedItems] = useState<Item[]>([]);
