@@ -187,14 +187,14 @@ function Catalog() {
             <Navbar />
 
             <div className="container py-4">
-                <div className="d-flex justify-content-between align-items-center mb-4" style={{ padding: '0 5px' }}>
+                <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 gap-sm-0 mb-4" style={{ padding: '0 5px' }}>
                     <nav style={{ fontSize: '10px', letterSpacing: '1px' }}>
                         <span className="text-uppercase text-muted">Home</span>
                         <span className="mx-2 text-muted">/</span>
                         <span className="text-uppercase fw-bold text-dark">Catalog</span>
                     </nav>
 
-                    <div className="d-flex align-items-center gap-4">
+                    <div className="d-flex w-100 w-sm-auto justify-content-between justify-content-sm-end align-items-center gap-4">
                         {isAdmin && (
                             <button
                                 onClick={() => setShowAddForm(!showAddForm)}
@@ -204,7 +204,7 @@ function Catalog() {
                             </button>
                         )}
 
-                        <div className="d-flex align-items-center gap-3 ps-4">
+                        <div className="d-flex align-items-center gap-3 ps-sm-4">
                             <span className="text-uppercase" style={{ fontSize: '9px', color: '#bbb', fontWeight: 'bold' }}>View:</span>
                             <select
                                 value={size}
@@ -220,9 +220,9 @@ function Catalog() {
                 </div>
 
                 {isAdmin && showAddForm && (
-                    <div className="mb-5 p-4 border shadow-sm" style={{ backgroundColor: '#fafafa' }}>
-                        <form onSubmit={handleCreateItem} className="row g-3 align-items-end">
-                            <div className="col-md-5">
+                    <div className="mb-5 p-3 p-md-4 border shadow-sm" style={{ backgroundColor: '#fafafa' }}>
+                        <form onSubmit={handleCreateItem} className="row g-3 align-items-start align-items-md-end">
+                            <div className="col-12 col-md-5">
                                 <label className="text-uppercase mb-2 d-block" style={{ fontSize: '9px', color: '#999', fontWeight: 'bold' }}>Product Name</label>
                                 <input
                                     type="text"
@@ -234,7 +234,7 @@ function Catalog() {
                                     onChange={e => setNewItem({ ...newItem, name: e.target.value })}
                                 />
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-12 col-md-3">
                                 <label className="text-uppercase mb-2 d-block" style={{ fontSize: '9px', color: '#999', fontWeight: 'bold' }}>Price ($)</label>
                                 <input
                                     type="number"
@@ -250,7 +250,7 @@ function Catalog() {
                                     }}
                                 />
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-12 col-md-4 mt-4 mt-md-0">
                                 <button type="submit" className="btn w-100 rounded-0 text-uppercase fw-bold text-white shadow-none"
                                     style={{ fontSize: '10px', height: '35px', backgroundColor: '#4272d7', border: 'none' }}>
                                     Save Product
@@ -277,9 +277,8 @@ function Catalog() {
                         <div className="row g-4">
                             {displayedItems.length > 0 ? displayedItems.map(item => (
                                 <div key={item.id} className="col-12 col-md-6 col-lg-4">
-                                    <div className="card border-0 rounded-0 h-100 position-relative"
+                                    <div className="card border-0 rounded-0 h-100 position-relative p-4 p-md-5"
                                         style={{
-                                            padding: '35px',
                                             backgroundColor: '#fff',
                                             boxShadow: '0 10px 30px rgba(0,0,0,0.04)',
                                             border: '1px solid #f1f1f1'
@@ -288,15 +287,15 @@ function Catalog() {
                                         {isAdmin && (
                                             <button
                                                 onClick={() => { setItemToDelete(item.id); setShowDeleteModal(true); }}
-                                                className="btn btn-sm position-absolute top-0 end-0 m-2 border-0 shadow-none text-muted"
-                                                style={{ fontSize: '14px' }}>
+                                                className="btn btn-sm position-absolute top-0 end-0 m-2 m-md-3 border-0 shadow-none text-muted bg-white"
+                                                style={{ fontSize: '16px', zIndex: 10 }}>
                                                 <i className="bi bi-x-lg"></i>
                                             </button>
                                         )}
 
                                         <div className="d-flex justify-content-between align-items-center mb-3">
                                             <div style={{ height: '1.5px', width: '25px', backgroundColor: '#4272d7' }}></div>
-                                            <span style={{ fontSize: '9px', color: '#ccc', letterSpacing: '1px' }} className="text-uppercase fw-bold">Stock</span>
+                                            <span style={{ fontSize: '9px', color: '#ccc', letterSpacing: '1px' }} className="text-uppercase fw-bold pe-4">Stock</span>
                                         </div>
 
                                         <h5 className="fw-normal text-uppercase mb-2" style={{ letterSpacing: '1px', fontSize: '15px', color: '#222' }}>
@@ -306,14 +305,14 @@ function Catalog() {
                                             ${Number(item.price).toFixed(2)}
                                         </h4>
 
-                                        <div className="d-flex gap-2 mt-auto">
-                                            <div className="d-flex border align-items-center rounded-0" style={{ width: '90px', borderColor: '#eee' }}>
-                                                <button className="btn btn-sm border-0 px-2 shadow-none" onClick={() => updateQty(item.id, -1)} style={{ color: '#4272d7' }}>−</button>
-                                                <input type="text" readOnly value={quantities[item.id] || 1} className="form-control form-control-sm border-0 text-center bg-transparent fw-bold shadow-none" style={{ fontSize: '12px' }} />
-                                                <button className="btn btn-sm border-0 px-2 shadow-none" onClick={() => updateQty(item.id, 1)} style={{ color: '#4272d7' }}>+</button>
+                                        <div className="d-flex flex-column flex-sm-row gap-2 mt-auto">
+                                            <div className="d-flex border align-items-center justify-content-center rounded-0 flex-shrink-0" style={{ width: '100%', maxWidth: '120px', borderColor: '#eee' }}>
+                                                <button className="btn btn-sm border-0 px-3 shadow-none h-100" onClick={() => updateQty(item.id, -1)} style={{ color: '#4272d7' }}>−</button>
+                                                <input type="text" readOnly value={quantities[item.id] || 1} className="form-control form-control-sm border-0 text-center bg-transparent fw-bold shadow-none w-100" style={{ fontSize: '12px' }} />
+                                                <button className="btn btn-sm border-0 px-3 shadow-none h-100" onClick={() => updateQty(item.id, 1)} style={{ color: '#4272d7' }}>+</button>
                                             </div>
                                             <button
-                                                className="btn flex-grow-1 text-uppercase fw-bold rounded-0 shadow-none"
+                                                className="btn flex-grow-1 text-uppercase fw-bold rounded-0 shadow-none w-100"
                                                 onClick={() => handleAddToCart(item.id)}
                                                 disabled={actionLoading === item.id}
                                                 style={{ backgroundColor: '#4272d7', color: 'white', fontSize: '10px', letterSpacing: '1px', border: 'none', height: '42px' }}>

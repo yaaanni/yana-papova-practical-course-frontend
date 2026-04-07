@@ -34,8 +34,8 @@ const Toast: React.FC<ToastProps> = ({
 
     return (
         <div
-            className="toast-container position-fixed bottom-0 end-0 p-3"
-            style={{ zIndex: 9999 }}
+            className="toast-container position-fixed bottom-0 end-0 p-2 p-sm-3"
+            style={{ zIndex: 9999, maxWidth: '100vw' }}
         >
             <style>
                 {`
@@ -52,6 +52,7 @@ const Toast: React.FC<ToastProps> = ({
                 style={{
                     backgroundColor: config[type],
                     minWidth: '220px',
+                    maxWidth: 'calc(100vw - 1rem)',
                     transition: 'all 0.3s ease',
                     opacity: show ? 1 : 0,
                     transform: show ? 'translateY(0)' : 'translateY(10px)',
@@ -60,12 +61,12 @@ const Toast: React.FC<ToastProps> = ({
                 }}
             >
                 <div className="d-flex p-2">
-                    <div className="toast-body text-uppercase fw-bold" style={{ fontSize: '10px', letterSpacing: '1px', flexGrow: 1 }}>
+                    <div className="toast-body text-uppercase fw-bold" style={{ fontSize: '10px', letterSpacing: '1px', flexGrow: 1, wordBreak: 'break-word' }}>
                         {message}
                     </div>
                     <button
                         type="button"
-                        className="btn-close btn-close-white me-2 m-auto shadow-none"
+                        className="btn-close btn-close-white me-2 m-auto shadow-none flex-shrink-0"
                         onClick={onClose}
                         style={{ fontSize: '0.6rem' }}
                     ></button>

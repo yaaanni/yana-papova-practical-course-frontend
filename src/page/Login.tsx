@@ -95,9 +95,9 @@ function Login() {
 
     return (
         <div className="vh-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: '#e9faff' }}>
-            <div className="bg-white shadow rounded-0 p-5 text-center" style={{ maxWidth: '480px', width: '100%' }}>
+            <div className="bg-white shadow rounded-0 p-4 p-sm-5 mx-3 mx-sm-0 text-center" style={{ maxWidth: '480px', width: '100%' }}>
                 <form onSubmit={handleLogin} noValidate>
-                    <h2 className="text-center mb-5" style={{ fontSize: '30px', color: '#555555', fontWeight: 'normal' }}>
+                    <h2 className="text-center mb-4 mb-sm-5" style={{ fontSize: '30px', color: '#555555', fontWeight: 'normal' }}>
                         Account Login
                     </h2>
 

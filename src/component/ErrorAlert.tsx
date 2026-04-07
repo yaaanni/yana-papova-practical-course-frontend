@@ -20,7 +20,7 @@ const ErrorAlert: React.FC<ErrorAlertProps> = ({ message }) => {
 
     return (
         <div
-            className={`d-flex align-items-center justify-content-center px-4 py-2 mb-4 `}
+            className="d-flex align-items-center justify-content-center px-3 px-sm-4 py-2 mb-3 mb-sm-4"
             style={{
                 backgroundColor: 'rgba(176, 42, 55, 0.05)',
                 border: '1px solid rgba(176, 42, 55, 0.1)',
@@ -28,11 +28,12 @@ const ErrorAlert: React.FC<ErrorAlertProps> = ({ message }) => {
                 fontSize: '13px',
                 fontWeight: '400',
                 transition: 'opacity 0.4s ease-in-out',
+                opacity: visible ? 1 : 0,
                 gap: '10px',
                 minHeight: '42px',
             }}
         >
-            <i className="bi bi-exclamation-circle" style={{ fontSize: '16px', display: 'flex' }}></i>
+            <i className="bi bi-exclamation-circle flex-shrink-0" style={{ fontSize: '16px', display: 'flex' }}></i>
             <span style={{ lineHeight: '1.2' }}>{message}</span>
         </div>
     );

@@ -220,13 +220,31 @@ function Cart() {
         <div className="min-vh-100 d-flex flex-column bg-white">
             <Navbar />
 
-            <div className="container py-5">
-                <div className="d-flex justify-content-between align-items-end mb-4">
+            <div className="container py-4 py-md-5">
+                
+                <div className="d-none d-md-flex justify-content-between align-items-end mb-4">
                     <h2 className="text-uppercase fw-light m-0" style={{ letterSpacing: '6px', fontSize: '24px' }}>Order History</h2>
                     <div className="d-flex gap-3 align-items-center">
                         <span className="text-uppercase text-muted" style={{ fontSize: '9px', letterSpacing: '1px' }}>Filter by:</span>
                         <select className="form-select form-select-sm rounded-0 border-0 bg-light shadow-none text-uppercase"
                             style={{ fontSize: '10px', letterSpacing: '1px', width: 'auto', cursor: 'pointer' }}
+                            value={filterStatus}
+                            onChange={(e) => setFilterStatus(e.target.value as any)}>
+                            <option value="ALL">All Statuses</option>
+                            <option value="CREATED">Created</option>
+                            <option value="PAID">Paid</option>
+                            <option value="FAILED">Failed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className="d-flex d-md-none flex-column gap-3 mb-4">
+                    <h2 className="text-uppercase fw-light m-0" style={{ letterSpacing: '6px', fontSize: '24px' }}>Order History</h2>
+                    <div className="d-flex gap-3 align-items-center justify-content-between">
+                        <span className="text-uppercase text-muted" style={{ fontSize: '9px', letterSpacing: '1px' }}>Filter by:</span>
+                        <select className="form-select form-select-sm rounded-0 border-0 bg-light shadow-none text-uppercase w-auto"
+                            style={{ fontSize: '10px', letterSpacing: '1px', cursor: 'pointer' }}
+                            value={filterStatus}
                             onChange={(e) => setFilterStatus(e.target.value as any)}>
                             <option value="ALL">All Statuses</option>
                             <option value="CREATED">Created</option>
@@ -246,7 +264,7 @@ function Cart() {
                         <Link to="/catalog" className="btn btn-outline-dark rounded-0 text-uppercase px-4 py-2" style={{ fontSize: '10px' }}>Go to Catalog</Link>
                     </div>
                 ) : (
-                    <div className="d-flex flex-column gap-5 mt-4">
+                    <div className="d-flex flex-column gap-4 gap-md-5 mt-4">
                         {filteredOrders.map((order, index) => {
                             const isPaid = order.status === 'PAID' || locallyPaidOrders.includes(order.id);
 
@@ -262,9 +280,29 @@ function Cart() {
                             const displayStatus = locallyPaidOrders.includes(order.id) ? 'PAID' : order.status;
 
                             return (
-                                <div key={order.id} className="border p-4 shadow-sm" style={{ borderColor: '#f0f0f0' }}>
-                                    <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom" style={{ borderColor: '#f8f8f8' }}>
+                                <div key={order.id} className="border p-3 p-md-4 shadow-sm" style={{ borderColor: '#f0f0f0' }}>
+                                    
+                                    <div className="d-none d-md-flex justify-content-between align-items-center mb-4 pb-3 border-bottom" style={{ borderColor: '#f8f8f8' }}>
                                         <div className="d-flex gap-4 align-items-center">
+                                            <div>
+                                                <span className="text-muted text-uppercase d-block" style={{ fontSize: '8px' }}>Position</span>
+                                                <span className="fw-bold" style={{ fontSize: '12px' }}>Order #{index + 1}</span>
+                                            </div>
+                                            <div>
+                                                <span className="text-muted text-uppercase d-block" style={{ fontSize: '8px' }}>Date</span>
+                                                <span className="fw-medium" style={{ fontSize: '11px' }}>{new Date(order.createdAt).toLocaleDateString()}</span>
+                                            </div>
+                                        </div>
+                                        <div className="text-end">
+                                            <span className="text-muted text-uppercase d-block mb-1" style={{ fontSize: '8px' }}>Current Status</span>
+                                            <span className="fw-bold text-uppercase" style={{ fontSize: '10px', color: getStatusColor(displayStatus as OrderStatus), letterSpacing: '1px' }}>
+                                                {displayStatus.replace('_', ' ')}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="d-flex d-md-none justify-content-between align-items-start mb-4 pb-3 border-bottom gap-3" style={{ borderColor: '#f8f8f8' }}>
+                                        <div className="d-flex flex-column gap-3">
                                             <div>
                                                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '8px' }}>Position</span>
                                                 <span className="fw-bold" style={{ fontSize: '12px' }}>Order #{index + 1}</span>
@@ -304,17 +342,28 @@ function Cart() {
                                     </div>
 
                                     {!isPaid && (
-                                        <div className={`mb-3 px-3 py-2 border-start border-4 d-flex justify-content-between align-items-center ${order.status === 'FAILED' ? 'bg-danger bg-opacity-10 border-danger' : 'bg-light border-primary'}`}>
-                                            <span className="text-uppercase text-muted fw-bold" style={{ fontSize: '9px', letterSpacing: '1px' }}>
-                                                {order.status === 'FAILED' ? "Last Attempt Failed. Select Method:" : "Payment Method:"}
-                                            </span>
-                                            <span className="fw-bold" style={{ fontSize: '11px' }}>
-                                                {selectedCard ? `**** **** **** ${selectedCard.number.slice(-4)}` : "None Selected"}
-                                            </span>
-                                        </div>
+                                        <>
+                                            <div className={`d-none d-md-flex mb-3 px-3 py-2 border-start border-4 justify-content-between align-items-center ${order.status === 'FAILED' ? 'bg-danger bg-opacity-10 border-danger' : 'bg-light border-primary'}`}>
+                                                <span className="text-uppercase text-muted fw-bold" style={{ fontSize: '9px', letterSpacing: '1px' }}>
+                                                    {order.status === 'FAILED' ? "Last Attempt Failed. Select Method:" : "Payment Method:"}
+                                                </span>
+                                                <span className="fw-bold" style={{ fontSize: '11px' }}>
+                                                    {selectedCard ? `**** **** **** ${selectedCard.number.slice(-4)}` : "None Selected"}
+                                                </span>
+                                            </div>
+
+                                            <div className={`d-flex d-md-none mb-3 px-3 py-2 border-start border-4 flex-column align-items-start gap-2 ${order.status === 'FAILED' ? 'bg-danger bg-opacity-10 border-danger' : 'bg-light border-primary'}`}>
+                                                <span className="text-uppercase text-muted fw-bold" style={{ fontSize: '9px', letterSpacing: '1px' }}>
+                                                    {order.status === 'FAILED' ? "Last Attempt Failed. Select Method:" : "Payment Method:"}
+                                                </span>
+                                                <span className="fw-bold" style={{ fontSize: '11px' }}>
+                                                    {selectedCard ? `**** **** **** ${selectedCard.number.slice(-4)}` : "None Selected"}
+                                                </span>
+                                            </div>
+                                        </>
                                     )}
 
-                                    <div className="d-flex justify-content-between align-items-center pt-2 border-top mt-0">
+                                    <div className="d-none d-md-flex justify-content-between align-items-center pt-2 border-top mt-0">
                                         <div className="d-flex gap-4 align-items-center">
                                             {isActionable && (
                                                 <>
@@ -361,6 +410,54 @@ function Cart() {
                                             <span className="fw-bold" style={{ fontSize: '20px' }}>${liveTotal.toFixed(2)}</span>
                                         </div>
                                     </div>
+
+                                    <div className="d-flex d-md-none flex-column gap-3 pt-3 border-top mt-0">
+                                        <div className="d-flex justify-content-between align-items-center pb-2 border-bottom" style={{ borderColor: '#f8f8f8' }}>
+                                            <span className="text-muted text-uppercase" style={{ fontSize: '10px' }}>Total Amount:</span>
+                                            <span className="fw-bold" style={{ fontSize: '20px' }}>${liveTotal.toFixed(2)}</span>
+                                        </div>
+                                        <div className="d-flex flex-column gap-3">
+                                            {isActionable && (
+                                                <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                                    {isEditable && (
+                                                        <button onClick={() => hasChanges && handleSaveChanges(order)}
+                                                            className={`btn btn-link text-decoration-none p-0 text-uppercase fw-bold shadow-none ${hasChanges ? 'text-primary' : 'text-muted'}`}
+                                                            style={{ fontSize: '9px' }}>
+                                                            {hasChanges ? 'Save Changes' : 'Edit'}
+                                                        </button>
+                                                    )}
+                                                    <button onClick={() => handleDetailsClick(order.id)}
+                                                        className="btn btn-link text-decoration-none text-muted p-0 text-uppercase fw-bold shadow-none"
+                                                        style={{ fontSize: '9px' }}>
+                                                        Details
+                                                    </button>
+                                                    <button onClick={() => triggerDeleteModal(order.id)}
+                                                        className="btn btn-link text-decoration-none text-muted p-0 text-uppercase fw-bold shadow-none"
+                                                        style={{ fontSize: '9px' }}>
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            )}
+
+                                            {isActionable && (
+                                                <button
+                                                    onClick={() => handlePayClick(order.id)}
+                                                    disabled={isPaymentProcessing}
+                                                    className="btn rounded-0 text-uppercase fw-bold w-100 shadow-none"
+                                                    style={{
+                                                        fontSize: '10px',
+                                                        backgroundColor: isPaymentProcessing ? '#ccc' : '#4272d7',
+                                                        color: '#fff',
+                                                        border: 'none',
+                                                        height: '38px',
+                                                        cursor: isPaymentProcessing ? 'not-allowed' : 'pointer'
+                                                    }}>
+                                                    {isPaymentProcessing ? 'Processing...' : (order.status === 'FAILED' ? 'Try Again' : 'Pay Now')}
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+
                                 </div>
                             );
                         })}
@@ -370,7 +467,7 @@ function Cart() {
 
             {showCardModal && (
                 <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: 'rgba(255,255,255,0.9)', zIndex: 2000 }}>
-                    <div className="p-5 bg-white border shadow-lg" style={{ maxWidth: '500px', width: '90%' }}>
+                    <div className="p-4 p-md-5 bg-white border shadow-lg" style={{ maxWidth: '500px', width: '90%' }}>
                         <h5 className="text-uppercase fw-bold mb-4 text-center">Select Payment Card</h5>
                         <div className="d-flex flex-column gap-3 mb-4">
                             {cards.length > 0 ? (
@@ -395,7 +492,25 @@ function Cart() {
                                 </div>
                             )}
                         </div>
-                        <div className="d-flex gap-3 mt-5">
+                        
+                        <div className="d-none d-md-flex gap-3 mt-5">
+                            <button
+                                className="btn btn-dark rounded-0 w-100 text-uppercase fw-bold shadow-none"
+                                style={{ fontSize: '10px', padding: '12px' }}
+                                onClick={() => setShowCardModal(false)}
+                                disabled={cards.length === 0}
+                            >
+                                Confirm
+                            </button>
+                            <button
+                                className="btn btn-outline-secondary rounded-0 w-100 text-uppercase fw-bold shadow-none"
+                                style={{ fontSize: '10px', padding: '12px' }}
+                                onClick={() => setShowCardModal(false)}
+                            >
+                                Close
+                            </button>
+                        </div>
+                        <div className="d-flex d-md-none flex-column gap-3 mt-4">
                             <button
                                 className="btn btn-dark rounded-0 w-100 text-uppercase fw-bold shadow-none"
                                 style={{ fontSize: '10px', padding: '12px' }}

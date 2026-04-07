@@ -170,7 +170,7 @@ function Profile() {
         <div className="min-vh-100 d-flex flex-column" style={{ backgroundColor: '#fff' }}>
             <Navbar />
 
-            <div className="container py-5">
+            <div className="container py-4 py-lg-5">
                 
                 <ErrorAlert message={error} />
 
@@ -181,8 +181,8 @@ function Profile() {
                 ) : user ? (
                     <div className="row g-0 border" style={{ minHeight: '600px', borderColor: '#f0f0f0' }}>
 
-                        <div className="col-lg-3 border-end p-0 bg-light">
-                            <div className="p-5 text-center">
+                        <div className="col-lg-3 border-bottom border-lg-bottom-0 border-lg-end p-0 bg-light">
+                            <div className="p-4 p-lg-5 text-center">
                                 <div className="mb-2 text-muted text-uppercase fw-bold" style={{ fontSize: '9px', letterSpacing: '2px' }}>Account Holder</div>
                                 <h5 className="text-uppercase m-0 fw-light" style={{ letterSpacing: '2px', color: '#1a1a1a' }}>
                                     {user.name} <br /> <strong>{user.surname}</strong>
@@ -192,22 +192,22 @@ function Profile() {
 
                             <div className="d-flex flex-column mt-2">
                                 <button onClick={() => { setActiveTab('personal'); setIsEditing(false); }}
-                                    className={`btn rounded-0 text-start px-5 py-3 border-0 shadow-none text-uppercase ${activeTab === 'personal' ? 'bg-white text-primary fw-bold' : 'text-muted fw-medium'}`}
+                                    className={`btn rounded-0 text-start px-4 px-lg-5 py-3 border-0 shadow-none text-uppercase ${activeTab === 'personal' ? 'bg-white text-primary fw-bold' : 'text-muted fw-medium'}`}
                                     style={{ fontSize: '10px', letterSpacing: '1.5px', borderLeft: activeTab === 'personal' ? '3px solid #4272d7' : '3px solid transparent' }}>
                                     Personal Info
                                 </button>
                                 <button onClick={() => { setActiveTab('wallet'); setIsEditing(false); }}
-                                    className={`btn rounded-0 text-start px-5 py-3 border-0 shadow-none text-uppercase ${activeTab === 'wallet' ? 'bg-white text-primary fw-bold' : 'text-muted fw-medium'}`}
+                                    className={`btn rounded-0 text-start px-4 px-lg-5 py-3 border-0 shadow-none text-uppercase ${activeTab === 'wallet' ? 'bg-white text-primary fw-bold' : 'text-muted fw-medium'}`}
                                     style={{ fontSize: '10px', letterSpacing: '1.5px', borderLeft: activeTab === 'wallet' ? '3px solid #4272d7' : '3px solid transparent' }}>
                                     Payment Cards ({cards.length}/5)
                                 </button>
                             </div>
                         </div>
 
-                        <div className="col-lg-9 p-5 bg-white">
+                        <div className="col-lg-9 p-4 p-lg-5 bg-white">
                             {activeTab === 'personal' ? (
                                 <section>
-                                    <div className="d-flex justify-content-between align-items-center mb-5">
+                                    <div className="d-none d-lg-flex justify-content-between align-items-center mb-5">
                                         <h4 className="text-uppercase m-0 fw-light" style={{ letterSpacing: '4px', fontSize: '18px' }}>Information</h4>
                                         {!isEditing ? (
                                             <button onClick={() => setIsEditing(true)} className="btn btn-outline-primary rounded-0 text-uppercase fw-bold" style={{ fontSize: '10px', letterSpacing: '1px' }}>Edit Profile</button>
@@ -215,6 +215,18 @@ function Profile() {
                                             <div className="d-flex gap-2">
                                                 <button onClick={handleSaveProfile} className="btn btn-primary rounded-0 text-uppercase fw-bold" style={{ fontSize: '10px', letterSpacing: '1px' }}>Save</button>
                                                 <button onClick={() => setIsEditing(false)} className="btn btn-outline-secondary rounded-0 text-uppercase fw-bold" style={{ fontSize: '10px', letterSpacing: '1px' }}>Cancel</button>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="d-flex d-lg-none flex-column gap-3 mb-4">
+                                        <h4 className="text-uppercase m-0 fw-light" style={{ letterSpacing: '4px', fontSize: '18px' }}>Information</h4>
+                                        {!isEditing ? (
+                                            <button onClick={() => setIsEditing(true)} className="btn btn-outline-primary rounded-0 text-uppercase fw-bold w-100" style={{ fontSize: '10px', letterSpacing: '1px' }}>Edit Profile</button>
+                                        ) : (
+                                            <div className="d-flex gap-2 w-100">
+                                                <button onClick={handleSaveProfile} className="btn btn-primary rounded-0 text-uppercase fw-bold flex-grow-1" style={{ fontSize: '10px', letterSpacing: '1px' }}>Save</button>
+                                                <button onClick={() => setIsEditing(false)} className="btn btn-outline-secondary rounded-0 text-uppercase fw-bold flex-grow-1" style={{ fontSize: '10px', letterSpacing: '1px' }}>Cancel</button>
                                             </div>
                                         )}
                                     </div>
@@ -287,7 +299,11 @@ function Profile() {
                                 </section>
                             ) : (
                                 <section>
-                                    <div className="d-flex justify-content-between align-items-center mb-5">
+                                    <div className="d-none d-lg-flex justify-content-between align-items-center mb-5">
+                                        <h4 className="text-uppercase m-0 fw-light" style={{ letterSpacing: '4px', fontSize: '18px' }}>Payment Cards</h4>
+                                        <span className="text-muted fw-bold" style={{ fontSize: '11px' }}>{cards.length} / 5</span>
+                                    </div>
+                                    <div className="d-flex d-lg-none justify-content-between align-items-center mb-4">
                                         <h4 className="text-uppercase m-0 fw-light" style={{ letterSpacing: '4px', fontSize: '18px' }}>Payment Cards</h4>
                                         <span className="text-muted fw-bold" style={{ fontSize: '11px' }}>{cards.length} / 5</span>
                                     </div>
@@ -309,7 +325,10 @@ function Profile() {
                                         ))}
                                         {cards.length < 5 && (
                                             <div className="col-md-6">
-                                                <button onClick={() => navigate('/addCard')} className="btn w-100 h-100 border border-dashed p-4 rounded-0 d-flex flex-column align-items-center justify-content-center shadow-none" style={{ borderStyle: 'dashed', color: '#4272d7', backgroundColor: '#fcfcfc', borderColor: '#4272d7' }}>
+                                                <button onClick={() => navigate('/addCard')} className="btn w-100 h-100 border border-dashed p-4 rounded-0 d-none d-lg-flex flex-column align-items-center justify-content-center shadow-none" style={{ borderStyle: 'dashed', color: '#4272d7', backgroundColor: '#fcfcfc', borderColor: '#4272d7' }}>
+                                                    <span className="fw-bold text-uppercase" style={{ fontSize: '10px' }}>+ Link New Card</span>
+                                                </button>
+                                                <button onClick={() => navigate('/addCard')} className="btn w-100 h-100 border border-dashed p-4 rounded-0 d-flex d-lg-none flex-column align-items-center justify-content-center shadow-none" style={{ borderStyle: 'dashed', color: '#4272d7', backgroundColor: '#fcfcfc', borderColor: '#4272d7', minHeight: '120px' }}>
                                                     <span className="fw-bold text-uppercase" style={{ fontSize: '10px' }}>+ Link New Card</span>
                                                 </button>
                                             </div>

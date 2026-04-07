@@ -19,7 +19,6 @@ function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    // Состояния уведомления
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
 
@@ -100,12 +99,12 @@ function Register() {
 
     return (
         <div className="min-vh-100 d-flex align-items-center justify-content-center py-5" style={{ backgroundColor: '#e9faff' }}>
-            <div className="bg-white shadow rounded-0 p-5 text-center" style={{ maxWidth: '500px', width: '100%' }}>
+            <div className="bg-white shadow rounded-0 p-4 p-sm-5 mx-3 mx-sm-0 text-center" style={{ maxWidth: '500px', width: '100%' }}>
                 <form onSubmit={handleRegister} noValidate>
-                    <h2 className="mb-5 fw-normal" style={{ fontSize: '28px', color: '#555555' }}>Create Account</h2>
+                    <h2 className="mb-4 mb-sm-5 fw-normal" style={{ fontSize: '28px', color: '#555555' }}>Create Account</h2>
 
                     <div className="d-flex flex-column gap-2 mb-3">
-                        <div className="d-flex gap-2">
+                        <div className="d-flex flex-column flex-sm-row gap-2">
                             <input type="text" className="form-control border shadow-none py-2 rounded-0" placeholder="Name"
                                 value={name} maxLength={30} onChange={(e) => setName(e.target.value)} />
                             <input type="text" className="form-control border shadow-none py-2 rounded-0" placeholder="Surname"

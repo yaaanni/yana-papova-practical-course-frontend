@@ -205,7 +205,7 @@ function Orders() {
                                 value={filterEnd} onChange={e => setFilterEnd(e.target.value)} />
                         </div>
                         <div className="col-md-3 d-flex gap-2">
-                            <button type="submit" className="btn btn-dark btn-sm rounded-0 w-100 text-uppercase fw-bold shadow-none" style={{ fontSize: '10px', height: '31px' }}>Filter</button>
+                            <button type="submit" className="btn btn-primary btn-sm rounded-0 w-100 text-uppercase fw-bold shadow-none" style={{ fontSize: '10px', height: '31px' }}>Filter</button>
                             <button type="button" onClick={handleClearFilters} className="btn btn-outline-secondary btn-sm rounded-0 w-100 text-uppercase fw-bold shadow-none" style={{ fontSize: '10px', height: '31px' }}>Clear</button>
                         </div>
                     </form>
