@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Navbar from '../component/Navbar';
 import { requestWithAuth } from '../api/apiClient';
 import { jwtDecode } from 'jwt-decode';
